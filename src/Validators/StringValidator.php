@@ -12,7 +12,6 @@ class StringValidator implements StringValidatorInterface
     {
         $this->params = empty($params) ? [
             'required' => false,
-            'string' => '',
             'subString' => '',
             'minLength' => null
         ] : $params;
@@ -20,19 +19,14 @@ class StringValidator implements StringValidatorInterface
 
     public function isValid(string|null $string): bool
     {
-        $this->params['string'] = $string;
-        if ($this->params['required'] == true && empty($string)) {
-            $isValid = false;
-        } else {
-            $isValid = true;
-        }
+        $isValid = ($this->params['required'] == true && empty($string)) ? false : true;
 
-        if (!empty($this->params['string']) && !empty($this->params['subString'])) {
-            $isValid = str_contains($this->params['string'], $this->params['subString']);
+        if (!empty($string) && !empty($this->params['subString'])) {
+            $isValid = str_contains($string, $this->params['subString']);
         }
 
         if (!empty($this->params['minLength'])) {
-            $isValid = (strlen($this->params['string']) < $this->params['minLength']) ? false : true;
+            $isValid = (strlen($string) < $this->params['minLength']) ? false : true;
         }
         return $isValid ?? true;
     }
