@@ -47,16 +47,4 @@ class NumberValidator implements NumberValidatorInterface
             'max' => $max
         ];
     }
-
-//    public function minLength(int $minLength): StringValidator
-//    {
-//        $this->params['minLength'] = $minLength;
-//        return new StringValidator($this->params);
-//    }
-//
-//    public function contains(string $subString): StringValidator
-//    {
-//        $this->params['subString'] = $subString;
-//        return new StringValidator($this->params);
-//    }
 }
