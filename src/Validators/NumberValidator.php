@@ -3,11 +3,10 @@
 namespace Php\Package\Validators;
 
 use Php\Package\Interfaces\NumberValidatorInterface;
+use Php\Package\Validator;
 
-class NumberValidator implements NumberValidatorInterface
+class NumberValidator extends Validator implements NumberValidatorInterface
 {
-    private $params = [];
-
     public function __construct(array $params = [])
     {
         $this->params = empty($params) ? [
@@ -30,16 +29,12 @@ class NumberValidator implements NumberValidatorInterface
         return $isValid;
     }
 
-
     public function positive()
     {
         $this->params['positive'] = true;
         return new NumberValidator($this->params);
     }
-    public function required()
-    {
-        $this->params['required'] = true;
-    }
+
     public function range(int $min, int $max)
     {
         $this->params['range'] = [

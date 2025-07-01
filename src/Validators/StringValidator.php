@@ -3,11 +3,10 @@
 namespace Php\Package\Validators;
 
 use Php\Package\Interfaces\StringValidatorInterface;
+use Php\Package\Validator;
 
-class StringValidator implements StringValidatorInterface
+class StringValidator extends Validator implements StringValidatorInterface
 {
-    private $params = [];
-
     public function __construct(array $params = [])
     {
         $this->params = empty($params) ? [
@@ -41,10 +40,5 @@ class StringValidator implements StringValidatorInterface
     {
         $this->params['subString'] = $subString;
         return new StringValidator($this->params);
-    }
-
-    public function required()
-    {
-        $this->params['required'] = true;
     }
 }
