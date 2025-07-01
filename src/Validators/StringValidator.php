@@ -9,11 +9,10 @@ class StringValidator extends Validator implements StringValidatorInterface
 {
     public function __construct(array $params = [])
     {
-        $this->params = empty($params) ? [
-            'required' => false,
+        $this->params = array_merge($this->params, [
             'subString' => '',
             'minLength' => null
-        ] : $params;
+        ]);
     }
 
     public function isValid(string|null $string): bool

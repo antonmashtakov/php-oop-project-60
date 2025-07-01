@@ -9,10 +9,9 @@ class NumberValidator extends Validator implements NumberValidatorInterface
 {
     public function __construct(array $params = [])
     {
-        $this->params = empty($params) ? [
-            'required' => false,
+        $this->params = array_merge($this->params, [
             'positive' => false
-        ] : $params;
+        ]);
     }
 
     public function isValid(int|null $num): bool
