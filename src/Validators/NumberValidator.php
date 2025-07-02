@@ -9,18 +9,18 @@ class NumberValidator extends Validator implements NumberValidatorInterface
 {
     public function isValid(int|null $num): bool
     {
-        $isValid = ($this->params['required'] == true && is_null($num)) ? false : true;
+        $isValid = ($this->getRequired() && is_null($num)) ? false : true;
 
-        if ($this->params['required'] == true) {
+        if ($this->getRequired()) {
             $isValid = ($num == null) ? false : true;
         }
 
-        if (isset($this->params['positive']) && $this->params['positive'] == true) {
-            $isValid = $num > 0 || $num == null && $this->params['required'] == false ? true : false;
+        if ($this->getPositive()) {
+            $isValid = $num > 0 || $num == null && !$this->getRequired() ? true : false;
         }
 
-        if (isset($this->params['range'])) {
-            $isValid = ($num >= $this->params['range']['min']  && $num <= $this->params['range']['max']) ? true : false;
+        if ($this->getRange()) {
+            $isValid = ($num >= $this->getRange()['min']  && $num <= $this->getRange()['max']) ? true : false;
         }
 
         return $isValid;
@@ -39,5 +39,14 @@ class NumberValidator extends Validator implements NumberValidatorInterface
             'max' => $max
         ];
         return new NumberValidator($this->params);
+    }
+
+    public function getPositive(): bool
+    {
+        return $this->params['positive'] ?? false;
+    }
+    public function getRange(): array
+    {
+        return $this->params['range'] ?? [];
     }
 }

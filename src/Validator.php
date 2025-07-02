@@ -35,8 +35,8 @@ class Validator implements RequiredValidatorInterface
         $this->params['required'] = true;
         return $this;
     }
-    public function getRequired()
+    public function getRequired(): bool
     {
-        return $this->params['required'];
+        return $this->params['required'] ?? false;
     }
 }
