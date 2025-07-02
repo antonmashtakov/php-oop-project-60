@@ -12,7 +12,8 @@ class NumberValidatorTest extends TestCase
         $v = new Validator();
         $schema = $v->number();
         $this->assertTrue($schema->isValid(null));
-        $schema->required();
+        $schema->required()->positive();
+        $this->assertFalse($schema->isValid(-5));
         $this->assertFalse($schema->isValid(null));
         $this->assertTrue($schema->isValid(7));
         $this->assertTrue($schema->positive()->isValid(10));

@@ -7,14 +7,6 @@ use Php\Package\Validator;
 
 class StringValidator extends Validator implements StringValidatorInterface
 {
-    public function __construct(array $params = [])
-    {
-        $this->params = array_merge($this->params, [
-            'subString' => '',
-            'minLength' => null
-        ]);
-    }
-
     public function isValid(string|null $string): bool
     {
         $isValid = ($this->params['required'] == true && empty($string)) ? false : true;

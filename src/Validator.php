@@ -12,6 +12,12 @@ class Validator implements RequiredValidatorInterface
     protected $params = [
         'required' => false,
     ];
+
+    public function __construct(array $params = [])
+    {
+        $this->params = array_merge($this->params, $params);
+    }
+
     public function string()
     {
         return new StringValidator();
@@ -27,5 +33,10 @@ class Validator implements RequiredValidatorInterface
     public function required()
     {
         $this->params['required'] = true;
+        return $this;
+    }
+    public function getRequired()
+    {
+        return $this->params['required'];
     }
 }

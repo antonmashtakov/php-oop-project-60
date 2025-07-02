@@ -7,24 +7,22 @@ use Php\Package\Validator;
 
 class NumberValidator extends Validator implements NumberValidatorInterface
 {
-    public function __construct(array $params = [])
-    {
-        $this->params = array_merge($this->params, [
-            'positive' => false
-        ]);
-    }
-
     public function isValid(int|null $num): bool
     {
-        $isValid = ($this->params['required'] == true && is_null($num)) ? false : true;
+        $isValid = ($this->getRequired() == true && is_null($num)) ? false : true;
 
-        if ($this->params['positive'] == true && $this->params['required'] == true) {
-            $isValid = $num > 0 ? true : false;
+        if ($this->params['required'] == true) {
+            $isValid = ($num == null) ? false : true;
+        }
+
+        if (isset($this->params['positive']) && $this->params['positive'] == true) {
+            $isValid = $num > 0 || $num == null && $this->params['required'] == false ? true : false;
         }
 
         if (isset($this->params['range'])) {
             $isValid = ($num >= $this->params['range']['min']  && $num <= $this->params['range']['max']) ? true : false;
         }
+
         return $isValid;
     }
 
