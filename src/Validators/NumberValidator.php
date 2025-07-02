@@ -9,7 +9,7 @@ class NumberValidator extends Validator implements NumberValidatorInterface
 {
     public function isValid(int|null $num): bool
     {
-        $isValid = ($this->getRequired() == true && is_null($num)) ? false : true;
+        $isValid = ($this->params['required'] == true && is_null($num)) ? false : true;
 
         if ($this->params['required'] == true) {
             $isValid = ($num == null) ? false : true;
@@ -38,5 +38,6 @@ class NumberValidator extends Validator implements NumberValidatorInterface
             'min' => $min,
             'max' => $max
         ];
+        return new NumberValidator($this->params);
     }
 }
