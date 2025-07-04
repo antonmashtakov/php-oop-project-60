@@ -68,8 +68,9 @@ class Validator implements RequiredValidatorInterface
 
     public function test(string $methodName, $value)
     {
-        if ($methodName != $this->params['customValidator']['method'])
+        if ($methodName != $this->params['customValidator']['method']) {
             throw new \Exception('Method not found');
+        }
 
         $schema = $this->params['customValidator']['schemaType'];
         $fn = $this->params['customValidator']['fn'];
