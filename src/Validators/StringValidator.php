@@ -1,10 +1,10 @@
 <?php
 
-namespace Php\Package\Validators;
+namespace Hexlet\Validator\Validators;
 
-use Php\Package\Interfaces\StringValidatorInterface;
-use Php\Package\Traits\CallTrait;
-use Php\Package\Validator;
+use Hexlet\Validator\Interfaces\StringValidatorInterface;
+use Hexlet\Validator\Traits\CallTrait;
+use Hexlet\Validator\Validator;
 
 class StringValidator extends Validator implements StringValidatorInterface
 {

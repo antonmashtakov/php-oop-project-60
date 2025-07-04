@@ -1,10 +1,10 @@
 <?php
 
-namespace Php\Package\Validators;
+namespace Hexlet\Validator\Validators;
 
-use Php\Package\Interfaces\NumberValidatorInterface;
-use Php\Package\Validator;
-use Php\Package\Traits\CallTrait;
+use Hexlet\Validator\Interfaces\NumberValidatorInterface;
+use Hexlet\Validator\Validator;
+use Hexlet\Validator\Traits\CallTrait;
 
 class NumberValidator extends Validator implements NumberValidatorInterface
 {

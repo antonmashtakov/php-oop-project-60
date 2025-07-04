@@ -1,9 +1,9 @@
 <?php
 
-namespace Php\Package\Validators;
+namespace Hexlet\Validator\Validators;
 
-use Php\Package\Interfaces\ArrayValidatorInterface;
-use Php\Package\Validator;
+use Hexlet\Validator\Interfaces\ArrayValidatorInterface;
+use Hexlet\Validator\Validator;
 
 class ArrayValidator extends Validator implements ArrayValidatorInterface
 {

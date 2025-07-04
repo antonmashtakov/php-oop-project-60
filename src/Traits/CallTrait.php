@@ -1,6 +1,6 @@
 <?php
 
-namespace Php\Package\Traits;
+namespace Hexlet\Validator\Traits;
 
 trait CallTrait
 {

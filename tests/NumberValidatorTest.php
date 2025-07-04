@@ -1,9 +1,9 @@
 <?php
 
-namespace Php\Package\Tests;
+namespace Hexlet\Validator\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Php\Package\Validator;
+use Hexlet\Validator\Validator;
 
 class NumberValidatorTest extends TestCase
 {

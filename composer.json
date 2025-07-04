@@ -15,12 +15,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Php\\Package\\": "src"
+      "Hexlet\\Validator\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Php\\Package\\Tests\\": "tests"
+      "Hexlet\\Validator\\Tests\\": "tests"
     }
   },
   "require": {

@@ -1,12 +1,11 @@
 <?php
 
-namespace Php\Package;
+namespace Hexlet\Validator;
 
-use _PHPStan_ac6dae9b0\Nette\Neon\Exception;
-use Php\Package\Validators\StringValidator;
-use Php\Package\Validators\NumberValidator;
-use Php\Package\Validators\ArrayValidator;
-use Php\Package\Interfaces\RequiredValidatorInterface;
+use Hexlet\Validator\Validators\StringValidator;
+use Hexlet\Validator\Validators\NumberValidator;
+use Hexlet\Validator\Validators\ArrayValidator;
+use Hexlet\Validator\Interfaces\RequiredValidatorInterface;
 
 class Validator implements RequiredValidatorInterface
 {
