@@ -18,19 +18,19 @@ class Validator implements RequiredValidatorInterface
         $this->params = array_merge($this->params, $params);
     }
 
-    public function string()
+    public function string(): StringValidator
     {
         return new StringValidator($this->params);
     }
-    public function number()
+    public function number(): NumberValidator
     {
         return new NumberValidator($this->params);
     }
-    public function array()
+    public function array(): ArrayValidator
     {
         return new ArrayValidator();
     }
-    public function required()
+    public function required(): Validator
     {
         $this->params['required'] = true;
         return $this;
@@ -40,7 +40,7 @@ class Validator implements RequiredValidatorInterface
         return $this->params['required'] ?? false;
     }
 
-    public function addValidator(string $schemaType, string $methodName, callable $fn)
+    public function addValidator(string $schemaType, string $methodName, callable $fn): void
     {
         if (empty($schemaType) || !$this->isSchema($schemaType)) {
             throw new \Exception('You must provide a Validator schema constructor function');
@@ -66,7 +66,7 @@ class Validator implements RequiredValidatorInterface
         return method_exists(self::class, $schemaType);
     }
 
-    public function test(string $methodName, $value)
+    public function test(string $methodName, $value): Validator
     {
         if ($methodName != $this->params['customValidator']['method']) {
             throw new \Exception('Method not found');

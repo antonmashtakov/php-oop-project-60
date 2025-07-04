@@ -34,13 +34,13 @@ class NumberValidator extends Validator implements NumberValidatorInterface
         return $isValid;
     }
 
-    public function positive()
+    public function positive(): NumberValidator
     {
         $this->params['positive'] = true;
         return new NumberValidator($this->params);
     }
 
-    public function range(int $min, int $max)
+    public function range(int $min, int $max): NumberValidator
     {
         $this->params['range'] = [
             'min' => $min,

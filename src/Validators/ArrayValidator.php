@@ -32,7 +32,7 @@ class ArrayValidator extends Validator implements ArrayValidatorInterface
         return $isValid;
     }
 
-    public function sizeof(int $size)
+    public function sizeof(int $size): ArrayValidator
     {
         $this->params['sizeof'] = $size;
         return new ArrayValidator($this->params);

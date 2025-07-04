@@ -4,10 +4,10 @@ namespace Hexlet\Validator\Traits;
 
 trait CallTrait
 {
-    public $fn;
-    public $args;
+    public $fn = null;
+    public $args = [];
 
-    public function __call($methodName, $args)
+    public function __call($methodName, $args = [])
     {
         collect($args)->map(function ($arg) {
             if (is_object($arg)) {

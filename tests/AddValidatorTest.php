@@ -7,7 +7,7 @@ use Hexlet\Validator\Validator;
 
 class AddValidatorTest extends TestCase
 {
-    public function testIsValid()
+    public function testIsValid(): void
     {
         $v = new Validator();
 
