@@ -25,7 +25,7 @@ class Validator implements RequiredValidatorInterface
     }
     public function number()
     {
-        return new NumberValidator();
+        return new NumberValidator($this->params);
     }
     public function array()
     {

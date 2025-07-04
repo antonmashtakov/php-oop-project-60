@@ -3,25 +3,12 @@
 namespace Php\Package\Validators;
 
 use Php\Package\Interfaces\StringValidatorInterface;
+use Php\Package\Traits\CallTrait;
 use Php\Package\Validator;
 
 class StringValidator extends Validator implements StringValidatorInterface
 {
-    private $fn;
-    private $args;
-
-    function __call($methodName, $args)
-    {
-        collect($args)->map(function ($arg) {
-            if (is_object($arg)) {
-                $this->fn = $arg;
-            } else {
-                $this->args[] = $arg;
-            }
-        });
-
-        return $this;
-    }
+    use CallTrait;
 
     public function isValid(string|null $string): bool
     {

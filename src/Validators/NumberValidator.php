@@ -4,9 +4,12 @@ namespace Php\Package\Validators;
 
 use Php\Package\Interfaces\NumberValidatorInterface;
 use Php\Package\Validator;
+use Php\Package\Traits\CallTrait;
 
 class NumberValidator extends Validator implements NumberValidatorInterface
 {
+    use CallTrait;
+
     public function isValid(int|null $num): bool
     {
         $isValid = ($this->getRequired() && is_null($num)) ? false : true;
@@ -21,6 +24,11 @@ class NumberValidator extends Validator implements NumberValidatorInterface
 
         if ($this->getRange()) {
             $isValid = ($num >= $this->getRange()['min']  && $num <= $this->getRange()['max']) ? true : false;
+        }
+
+        if (is_object($this->fn)) {
+            $callback = $this->fn;
+            $isValid = $callback($num, implode(',', $this->args));
         }
 
         return $isValid;
