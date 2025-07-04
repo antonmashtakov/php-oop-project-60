@@ -42,14 +42,17 @@ class Validator implements RequiredValidatorInterface
 
     public function addValidator(string $schemaType, string $methodName, callable $fn)
     {
-        if (empty($schemaType) || !$this->isSchema($schemaType))
+        if (empty($schemaType) || !$this->isSchema($schemaType)) {
             throw new \Exception('You must provide a Validator schema constructor function');
+        }
 
-        if (empty($methodName))
+        if (empty($methodName)) {
             throw new \Exception('A Method name must be provided');
+        }
 
-        if (!is_object($fn))
+        if (!is_object($fn)) {
             throw new \Exception('Method function must be provided');
+        }
 
         $this->params['customValidator'] = [
             'schemaType' => $schemaType,
