@@ -2,6 +2,7 @@
 
 namespace Php\Package;
 
+use _PHPStan_ac6dae9b0\Nette\Neon\Exception;
 use Php\Package\Validators\StringValidator;
 use Php\Package\Validators\NumberValidator;
 use Php\Package\Validators\ArrayValidator;
@@ -20,7 +21,7 @@ class Validator implements RequiredValidatorInterface
 
     public function string()
     {
-        return new StringValidator();
+        return new StringValidator($this->params);
     }
     public function number()
     {
@@ -38,5 +39,40 @@ class Validator implements RequiredValidatorInterface
     public function getRequired(): bool
     {
         return $this->params['required'] ?? false;
+    }
+
+    public function addValidator(string $schemaType, string $methodName, callable $fn)
+    {
+        if (empty($schemaType) || !$this->isSchema($schemaType))
+            throw new \Exception('You must provide a Validator schema constructor function');
+
+        if (empty($methodName))
+            throw new \Exception('A Method name must be provided');
+
+        if (!is_object($fn))
+            throw new \Exception('Method function must be provided');
+
+        $this->params['customValidator'] = [
+            'schemaType' => $schemaType,
+            'method' => $methodName,
+            'fn' => $fn,
+        ];
+    }
+
+    private function isSchema(string $schemaType): bool
+    {
+        return method_exists(self::class, $schemaType);
+    }
+
+    public function test(string $methodName, $value)
+    {
+        if ($methodName != $this->params['customValidator']['method'])
+            throw new \Exception('Method not found');
+
+        $schema = $this->params['customValidator']['schemaType'];
+        $fn = $this->params['customValidator']['fn'];
+        $validator = $this->{$schema}();
+
+        return $validator->{$methodName}($value, $fn);
     }
 }

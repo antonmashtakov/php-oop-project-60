@@ -7,6 +7,22 @@ use Php\Package\Validator;
 
 class StringValidator extends Validator implements StringValidatorInterface
 {
+    private $fn;
+    private $args;
+
+    function __call($methodName, $args)
+    {
+        collect($args)->map(function ($arg) {
+            if (is_object($arg)) {
+                $this->fn = $arg;
+            } else {
+                $this->args[] = $arg;
+            }
+        });
+
+        return $this;
+    }
+
     public function isValid(string|null $string): bool
     {
         $isValid = ($this->getRequired() == true && empty($string)) ? false : true;
@@ -18,6 +34,16 @@ class StringValidator extends Validator implements StringValidatorInterface
         if ($this->getMinLength()) {
             $isValid = (strlen($string) < $this->getMinLength()) ? false : true;
         }
+
+        if (!empty($this->params['newValidator'])) {
+            $isValid = $this->{$this->params['newValidator']['method']}($this->params['newValidator']);
+        }
+
+        if (is_object($this->fn)) {
+            $callback = $this->fn;
+            $isValid = $callback($string, implode(',', $this->args));
+        }
+
         return $isValid ?? true;
     }
 
